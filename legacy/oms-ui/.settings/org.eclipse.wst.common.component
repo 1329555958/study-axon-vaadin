@@ -3,9 +3,12 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
         <dependent-module archiveName="oms-core-1.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/study-axon-vaadin-legacy-core/study-axon-vaadin-legacy-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+=======
+>>>>>>> 42ae4d87e457562241464745b54a46b7b59e8a6f
         <property name="context-root" value="oms-ui"/>
         <property name="java-output-path" value="/study-axon-vaadin-legacy-ui/target/classes"/>
     </wb-module>
