@@ -41,19 +41,6 @@ public class Runner {
         commandGateway.send(new ConfirmOrderCommand("3"));
 
         commandGateway.send(new CreateOrderCommand("4", "Sofa"));
-        
-        commandGateway.send(new CreateOrderCommand("5", "Chair"));
-        commandGateway.send(new CancelOrderCommand("5"));
-        commandGateway.send(new ConfirmOrderCommand("5"));
-
-        commandGateway.send(new CreateOrderCommand("6", "Table"));
-        commandGateway.send(new ConfirmOrderCommand("6"));
-        commandGateway.send(new CancelOrderCommand("6"));
-
-        commandGateway.send(new CreateOrderCommand("7", "Lamp"));
-        commandGateway.send(new ConfirmOrderCommand("7"));
-
-        commandGateway.send(new CreateOrderCommand("8", "Sofa"));
 
         List<Order> orders = queryRepository.findOrders();
         for (Order order : orders) {
