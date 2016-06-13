@@ -30,7 +30,7 @@ Launch the web application from project study-axon-vaadin-legacy-ui:
         Run as > Maven Build... 
 and:
 
-- set goal to "jetty-run"
+- set goal to "jetty:run"
 - check "Resolve Workspace artifacts"
 
 >Note. With the option "Resolve Workspace artifacts", no need to package the projects before running "jetty-run".
