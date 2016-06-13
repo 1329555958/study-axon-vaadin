@@ -40,9 +40,9 @@ class Order extends AbstractAnnotatedAggregateRoot<String> {
     
     public void confirm() {
     	// we can only confirm an open order.
-        if (status == Status.OPEN) {
+//        if (status == Status.OPEN) {
             apply(new OrderConfirmedEvent(getIdentifier()));
-        }
+//        }
     }
 
     public void cancel() {

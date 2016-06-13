@@ -20,49 +20,51 @@ import com.acme.oms.query.OrderQueryRepository;
  */
 public class Runner {
 
-    public static void main(String... args) {
-        @SuppressWarnings("resource")
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("META-INF/spring/application-context.xml");
-        appCtx.registerShutdownHook();
-        OrderQueryRepository queryRepository = appCtx.getBean(JpaOrderQueryRepository.class);
-        CommandBus commandBus = appCtx.getBean(CommandBus.class);
-        
-        CommandGateway commandGateway = new DefaultCommandGateway(commandBus);
+	public static void main(String... args) {
+		@SuppressWarnings("resource")
+		ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext(
+				"META-INF/spring/application-context.xml");
+		appCtx.registerShutdownHook();
+		OrderQueryRepository queryRepository = appCtx.getBean(JpaOrderQueryRepository.class);
+		CommandBus commandBus = appCtx.getBean(CommandBus.class);
 
-        commandGateway.send(new CreateOrderCommand("1", "Chair"));
-        commandGateway.send(new CancelOrderCommand("1"));
-        commandGateway.send(new ConfirmOrderCommand("1"));
+		CommandGateway commandGateway = new DefaultCommandGateway(commandBus);
 
-        commandGateway.send(new CreateOrderCommand("2", "Table"));
-        commandGateway.send(new ConfirmOrderCommand("2"));
-        commandGateway.send(new CancelOrderCommand("2"));
+		commandGateway.send(new CreateOrderCommand("1", "Chair"));
+		commandGateway.send(new ConfirmOrderCommand("1"));
+		commandGateway.send(new ConfirmOrderCommand("1"));
+		commandGateway.send(new ConfirmOrderCommand("1"));
+		commandGateway.send(new ConfirmOrderCommand("1"));
+		commandGateway.send(new CancelOrderCommand("1"));
 
-        commandGateway.send(new CreateOrderCommand("3", "Lamp"));
-        commandGateway.send(new ConfirmOrderCommand("3"));
+		// commandGateway.send(new CreateOrderCommand("2", "Table"));
+		// commandGateway.send(new ConfirmOrderCommand("2"));
+		// commandGateway.send(new CancelOrderCommand("2"));
+		//
+		// commandGateway.send(new CreateOrderCommand("3", "Lamp"));
+		// commandGateway.send(new ConfirmOrderCommand("3"));
+		//
+		// commandGateway.send(new CreateOrderCommand("4", "Sofa"));
+		//
+		// commandGateway.send(new CreateOrderCommand("5", "Chair"));
+		// commandGateway.send(new CancelOrderCommand("5"));
+		// commandGateway.send(new ConfirmOrderCommand("5"));
+		//
+		// commandGateway.send(new CreateOrderCommand("6", "Table"));
+		// commandGateway.send(new ConfirmOrderCommand("6"));
+		// commandGateway.send(new CancelOrderCommand("6"));
+		//
+		// commandGateway.send(new CreateOrderCommand("7", "Lamp"));
+		// commandGateway.send(new ConfirmOrderCommand("7"));
+		//
+		// commandGateway.send(new CreateOrderCommand("8", "Sofa"));
 
-        commandGateway.send(new CreateOrderCommand("4", "Sofa"));
-        
-        commandGateway.send(new CreateOrderCommand("5", "Chair"));
-        commandGateway.send(new CancelOrderCommand("5"));
-        commandGateway.send(new ConfirmOrderCommand("5"));
+		List<Order> orders = queryRepository.findOrders();
+		for (Order order : orders) {
+			System.out.println(String.format("Order [%s] for a [%s] has status: %s", order.getOrderId(),
+					order.getProductId(), order.getStatus()));
+		}
 
-        commandGateway.send(new CreateOrderCommand("6", "Table"));
-        commandGateway.send(new ConfirmOrderCommand("6"));
-        commandGateway.send(new CancelOrderCommand("6"));
-
-        commandGateway.send(new CreateOrderCommand("7", "Lamp"));
-        commandGateway.send(new ConfirmOrderCommand("7"));
-
-        commandGateway.send(new CreateOrderCommand("8", "Sofa"));
-
-        List<Order> orders = queryRepository.findOrders();
-        for (Order order : orders) {
-            System.out.println(String.format("Order [%s] for a [%s] has status: %s",
-                                             order.getOrderId(),
-                                             order.getProductId(),
-                                             order.getStatus()));
-        }
-        
-    }
+	}
 
 }
